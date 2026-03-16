@@ -9,6 +9,8 @@ use RyanChandler\LaravelCloudflareTurnstile\Rules\Turnstile;
 
 class Captcha implements ValidationRule
 {
+    public bool $implicit = true;
+
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if(!config('captcha.enabled')) {
