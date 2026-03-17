@@ -22,6 +22,7 @@
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "code16/pint-config": "^1.2",
         "laravel/pint": "^1.14",
         "livewire/livewire": "^4.2",
         "nunomaduro/collision": "^8.8",
@@ -43,7 +44,10 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "@composer run prepare",
+        "post-autoload-dump": [
+            "@composer run prepare",
+            "@php vendor/bin/pint-config install"
+        ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
