@@ -37,8 +37,9 @@ class CaptchaServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         Blade::component('captcha', Captcha::class);
+
         Config::set([
-            'services.turnstile.secret' => config('captcha.providers.turnstile.secret_key'),
+            'services.turnstile.secret' => config('captcha.providers.turnstile.secret_key', ''),
         ]);
     }
 }

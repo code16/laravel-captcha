@@ -6,8 +6,8 @@ return [
     'theme' => env('CAPTCHA_THEME', 'light'),
     'providers' => [
         'turnstile' => [
-            'site_key' => env('CAPTCHA_TURNSTILE_SITE_KEY'),
-            'secret_key' => env('CAPTCHA_TURNSTILE_SECRET_KEY'),
+            'site_key' => env('CAPTCHA_TURNSTILE_SITE_KEY', ''),
+            'secret_key' => env('CAPTCHA_TURNSTILE_SECRET_KEY', ''),
         ],
     ],
 ];

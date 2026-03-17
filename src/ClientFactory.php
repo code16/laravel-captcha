@@ -12,7 +12,7 @@ class ClientFactory
 {
     public function __construct(
         protected string $provider,
-        protected string $secret,
+        protected ?string $secret,
     ) {
     }
 
@@ -26,7 +26,7 @@ class ClientFactory
     public function make(): ClientInterface
     {
         return match ($this->provider) {
-            'turnstile' => new TurnstileClient($this->secret),
+            'turnstile' => new TurnstileClient($this->secret ?: ''),
         };
     }
 }
