@@ -13,7 +13,7 @@ class Captcha implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!config('captcha.enabled')) {
+        if (!config('captcha.enabled')) {
             return;
         }
 
@@ -22,10 +22,10 @@ class Captcha implements ValidationRule
             [
                 $attribute => [
                     'required',
-                    match(config('captcha.provider')) {
+                    match (config('captcha.provider')) {
                         'turnstile' => new Turnstile(),
-                    }
-                ]
+                    },
+                ],
             ]
         );
 

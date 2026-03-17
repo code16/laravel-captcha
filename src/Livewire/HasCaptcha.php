@@ -12,7 +12,7 @@ trait HasCaptcha
 {
     public function exceptionHasCaptcha($e): void
     {
-        if($e instanceof ValidationException) {
+        if ($e instanceof ValidationException) {
             $this->resetCaptcha();
         }
     }
