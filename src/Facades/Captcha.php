@@ -7,6 +7,9 @@ use Code16\Captcha\Contracts\ClientInterface;
 use Code16\Captcha\Testing\FakeClient;
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @method static mixed verify(string $token)
+ */
 class Captcha extends Facade
 {
     protected static function getFacadeAccessor(): string

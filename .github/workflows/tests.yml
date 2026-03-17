@@ -1,0 +1,18 @@
+name: Laravel Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  laravel-tests:
+    uses: code16/.github/.github/workflows/tests.yml@main
+    with:
+      php-version: 8.5
+      is-package: true
+      test-command: vendor/bin/pest
+      slack-channel-id: C01V4CD4RUG
+    secrets: inherit
