@@ -3,6 +3,7 @@
 return [
     'enabled' => env('CAPTCHA_ENABLED', true),
     'provider' => env('CAPTCHA_PROVIDER', 'turnstile'),
+    'theme' => env('CAPTCHA_THEME', 'light'),
     'providers' => [
         'turnstile' => [
             'site_key' => env('CAPTCHA_TURNSTILE_SITE_KEY'),

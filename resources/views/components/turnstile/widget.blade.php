@@ -54,6 +54,6 @@
     data-sitekey="{{ config('captcha.providers.turnstile.site_key') }}"
     x-modelable="token"
     wire:ignore
-    {{ $attributes }}
+    {{ $attributes->merge(['data-theme' => config('captcha.theme')]) }}
 >
 </div>
