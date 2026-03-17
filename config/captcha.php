@@ -10,4 +10,6 @@ return [
             'secret_key' => env('CAPTCHA_TURNSTILE_SECRET_KEY', ''),
         ],
     ],
+    'log_channel' => env('CAPTCHA_LOG_CHANNEL'),
+    'log_verification_errors' => env('CAPTCHA_LOG_VERIFICATION_ERRORS', true),
 ];

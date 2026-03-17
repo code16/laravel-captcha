@@ -17,6 +17,7 @@ class CaptchaServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-captcha')
             ->hasConfigFile()
+            ->hasTranslations()
             ->hasViews('captcha');
     }
 

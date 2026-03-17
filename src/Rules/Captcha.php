@@ -3,9 +3,9 @@
 namespace Code16\Captcha\Rules;
 
 use Closure;
+use Code16\Captcha\Providers\Turnstile\TurnstileRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Validator;
-use RyanChandler\LaravelCloudflareTurnstile\Rules\Turnstile;
 
 class Captcha implements ValidationRule
 {
@@ -23,9 +23,12 @@ class Captcha implements ValidationRule
                 $attribute => [
                     'required',
                     match (config('captcha.provider')) {
-                        'turnstile' => new Turnstile(),
+                        'turnstile' => new TurnstileRule(),
                     },
                 ],
+            ],
+            [
+                "$attribute.required" => __('captcha::errors.required'),
             ]
         );
 
