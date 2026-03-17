@@ -8,6 +8,7 @@ return [
         'turnstile' => [
             'site_key' => env('CAPTCHA_TURNSTILE_SITE_KEY', ''),
             'secret_key' => env('CAPTCHA_TURNSTILE_SECRET_KEY', ''),
+            'invisible_mode' => env('CAPTCHA_TURNSTILE_INVISIBLE_MODE', false),
         ],
     ],
     'log_channel' => env('CAPTCHA_LOG_CHANNEL'),

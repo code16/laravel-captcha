@@ -23,16 +23,20 @@
             turnstile.reset(this.widgetId);
         },
         init() {
-            new IntersectionObserver((entries, observer) => {
-                this.intersecting = entries[0].isIntersecting;
-                if(entries[0].isIntersecting) {
-                    if(this.widgetId)  {
-                        this.reset();
-                    } else {
-                        this.load();
+            if($el.hasAttribute('data-invisible')) {
+                this.load();
+            } else {
+                new IntersectionObserver((entries, observer) => {
+                    this.intersecting = entries[0].isIntersecting;
+                    if(entries[0].isIntersecting) {
+                        if(this.widgetId)  {
+                            this.reset();
+                        } else {
+                            this.load();
+                        }
                     }
-                }
-            }).observe(this.$el.closest('form') || this.$el);
+                }).observe(this.$el.closest('form') || this.$el);
+            }
 
             this.$nextTick(() => {
                 new MutationObserver(() => {
@@ -52,6 +56,9 @@
         }
     }"
     data-sitekey="{{ config('captcha.providers.turnstile.site_key') }}"
+    @if(config('captcha.providers.turnstile.invisible_mode'))
+        data-invisible
+    @endif
     x-modelable="token"
     wire:ignore
     {{ $attributes->merge(['data-theme' => config('captcha.theme')]) }}

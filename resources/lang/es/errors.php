@@ -2,5 +2,6 @@
 
 return [
     'required' => 'El captcha debe ser validado antes de enviar el formulario.',
+    'required.invisible' => 'Hemos detectado un comportamiento sospechoso. Por favor, espere unos momentos antes de enviar el formulario.',
     'verification_failed' => 'Se ha producido un error durante la verificación del captcha. Por favor, inténtelo de nuevo más tarde.',
 ];

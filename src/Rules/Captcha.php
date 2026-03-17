@@ -28,7 +28,9 @@ class Captcha implements ValidationRule
                 ],
             ],
             [
-                "$attribute.required" => __('captcha::errors.required'),
+                "$attribute.required" => config('captcha.provider') === 'turnstile' && config('captcha.providers.turnstile.invisible_mode')
+                    ? __('captcha::errors.required.invisible')
+                    : __('captcha::errors.required'),
             ]
         );
 
