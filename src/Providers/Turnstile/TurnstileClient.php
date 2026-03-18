@@ -3,6 +3,7 @@
 namespace Code16\Captcha\Providers\Turnstile;
 
 use Code16\Captcha\Contracts\ClientInterface;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Context;
 use RyanChandler\LaravelCloudflareTurnstile\Client;
@@ -22,6 +23,11 @@ class TurnstileClient implements ClientInterface
             Context::add('response', $exception->response);
 
             return SiteverifyResponse::failure($exception->response->json('error-codes', ['unknown']));
+        } catch (ConnectionException $exception) {
+            report($exception);
+
+            // cloudflare is down, don't block user
+            return SiteverifyResponse::success();
         }
     }
 }

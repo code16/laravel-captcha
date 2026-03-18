@@ -30,6 +30,7 @@ class TurnstileRule implements ValidationRule
                     'errorCodes' => $response->errorCodes,
                 ]);
             }
+
             $fail(__('captcha::errors.verification_failed'));
         }
     }
