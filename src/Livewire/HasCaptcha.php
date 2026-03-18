@@ -10,6 +10,15 @@ use Livewire\Component;
  */
 trait HasCaptcha
 {
+    protected bool $captchaResetDispatched = false;
+
+    public function bootHasCaptcha(): void
+    {
+        $this->withValidator(function () {
+            $this->resetCaptcha();
+        });
+    }
+
     public function exceptionHasCaptcha($e): void
     {
         if ($e instanceof ValidationException) {
@@ -19,6 +28,9 @@ trait HasCaptcha
 
     public function resetCaptcha(): void
     {
-        $this->dispatch('reset-captcha');
+        if (!$this->captchaResetDispatched) {
+            $this->dispatch('reset-captcha');
+            $this->captchaResetDispatched = true;
+        }
     }
 }
