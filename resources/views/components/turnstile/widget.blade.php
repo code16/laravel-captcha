@@ -47,6 +47,9 @@
             this.$wire?.on('reset-captcha', () => {
                 this.token = null;
             });
+            this.$el.addEventListener('reset-captcha', () => {
+                this.token = null;
+            });
 
             this.$watch('token', (token) => {
                 if(!token && this.widgetId) {
@@ -55,6 +58,7 @@
             });
         }
     }"
+    data-captcha
     data-sitekey="{{ config('captcha.providers.turnstile.site_key') }}"
     @if(config('captcha.providers.turnstile.invisible_mode'))
         data-invisible
