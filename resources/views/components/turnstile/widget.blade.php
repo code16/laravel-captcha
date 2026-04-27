@@ -22,7 +22,7 @@
         reset() {
             turnstile.reset(this.widgetId);
         },
-        init() {
+        initCaptcha() {
             if($el.hasAttribute('data-invisible')) {
                 this.load();
             } else {
@@ -56,6 +56,13 @@
                     this.reset();
                 }
             });
+        },
+        init() {
+            if('turnstile' in window) {
+                this.initCaptcha();
+            } else {
+                document.querySelector('#turnstile-script').addEventListener('load', () => this.initCaptcha());
+            }
         }
     }"
     data-captcha
