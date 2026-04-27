@@ -2,6 +2,7 @@
 
 namespace Code16\Captcha\View\Components;
 
+use Code16\Captcha\Enums\CaptchaLoadMode;
 use Code16\Captcha\Livewire\HasCaptcha;
 use Exception;
 use Illuminate\View\Component;
@@ -9,8 +10,9 @@ use Livewire\Livewire;
 
 class Captcha extends Component
 {
-    public function __construct()
-    {
+    public function __construct(
+        public ?CaptchaLoadMode $loadMode = CaptchaLoadMode::Intersect
+    ) {
         $this->checkLivewireComponent();
     }
 

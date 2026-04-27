@@ -1,3 +1,7 @@
+@props([
+    /** @var \Code16\Captcha\Enums\CaptchaLoadMode $loadMode */
+    'loadMode'
+])
 
 <div x-data="{
         widgetId: null,
@@ -23,9 +27,9 @@
             turnstile.reset(this.widgetId);
         },
         initCaptcha() {
-            if($el.hasAttribute('data-invisible')) {
-                this.load();
-            } else {
+            const form = this.$el.closest('form');
+
+            if(this.$el.getAttribute('data-load-mode') === 'intersect') {
                 new IntersectionObserver((entries, observer) => {
                     this.intersecting = entries[0].isIntersecting;
                     if(entries[0].isIntersecting) {
@@ -35,7 +39,13 @@
                             this.load();
                         }
                     }
-                }).observe(this.$el.closest('form') || this.$el);
+                }).observe(form || this.$el);
+            } else if(this.$el.getAttribute('data-load-mode') === 'form-interaction') {
+                form.addEventListener('focusin', () => !this.widgetId && this.load(), { once:true });
+                form.addEventListener('input', () => !this.widgetId && this.load(), { once:true });
+                form.addEventListener('change', () => !this.widgetId && this.load(), { once:true });
+            } else {
+                this.load();
             }
 
             this.$nextTick(() => {
@@ -67,9 +77,11 @@
     }"
     data-captcha
     data-sitekey="{{ config('captcha.providers.turnstile.site_key') }}"
-    @if(config('captcha.providers.turnstile.invisible_mode'))
-        data-invisible
-    @endif
+    data-load-mode="{{
+        config('captcha.providers.turnstile.invisible_mode')
+            ? \Code16\Captcha\Enums\CaptchaLoadMode::PageLoad->value
+            : $loadMode->value
+    }}"
     x-modelable="token"
     wire:ignore
     {{ $attributes->merge(['data-theme' => config('captcha.theme')]) }}
